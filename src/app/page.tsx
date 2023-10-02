@@ -50,6 +50,7 @@ export default function Home() {
     const sign = e.target.innerText
 
     const displayLength = display.toString().length
+    const lastValue = display.at(-1) as string
 
     if (sign == 'CE') {
       return setDisplay('0')
@@ -58,13 +59,13 @@ export default function Home() {
     if (sign == 'C') {
       if (display == '0') return
       if (display != '0' && displayLength == 1) return setDisplay('0')
-      if (display != '0' && displayLength > 1) return setDisplay(display.toString().slice(0, -1))
+      if (display != '0' && displayLength > 1) return setDisplay(display.slice(0, -1))
     }
 
     if (sign == '=') {
       let result = eval(display).toString()
       // If result have float with length bigger then 4 digits, cut off
-      if (result.toString().includes('.') && result.toString().split('.')[1].length > 4) {
+      if (result.includes('.') && result.split('.')[1].length > 4) {
         result = Number.parseFloat(eval(result)).toFixed(4)
       }
       return setDisplay(result)
@@ -72,11 +73,16 @@ export default function Home() {
     }
 
     if (sign == '.') {
+      // const regex = /\.[0-9]+/g
+      // console.log(display.match(regex));
+      if (operators.includes(lastValue) || lastValue == '.') return
       return setDisplay(display + sign)
     }
 
     if (operators.includes(sign)) {
       if (display == '0') return setDisplay(sign)
+      if (operators.includes(lastValue) || lastValue == '.')
+        return setDisplay(display.slice(0, -1) + sign)
       if (operators.includes(display)) return setDisplay(sign)
       if (displayLength >= 1) return setDisplay(display + sign)
     }
