@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-// const stringMath = require('string-math')
 
 // Don't change order!
 const DATA = [
@@ -50,30 +49,39 @@ export default function Home() {
 
     const sign = e.target.innerText
 
-    switch (sign) {
-      case 'CE':
-        setDisplay('0')
-        break
-      case '=':
-        // Calculate equation. Alternative stringMath https://github.com/devrafalko/string-math
-        const result = eval(display)
-        setDisplay(result)
-        break
-      case numbers.includes(sign) && display == '0' && sign:
-        setDisplay(sign)
-        break
-      case numbers.includes(sign) && sign:
-        setDisplay(display + sign)
-        break
-      case operators.includes(sign) && display == '0' && sign:
-        setDisplay(sign)
-        break
-      case operators.includes(sign) && sign:
-        setDisplay(display + sign)
-        break
-      default:
-        console.log('default')
-        break
+    if (sign == 'CE') {
+      setDisplay('0')
+      return
+    }
+    if (sign == '=') {
+      // Calculate equation. Alternative stringMath https://github.com/devrafalko/string-math
+      let result = eval(display)
+      // If result have float with length bigger then 4 digits, cut off
+      if (result.toString().includes('.') && result.toString().split('.')[1].length > 4) {
+        result = Number.parseFloat(eval(result)).toFixed(4)
+      }
+      setDisplay(result)
+      return
+    }
+    if (sign == '.') {
+      setDisplay(display + sign)
+      return
+    }
+    if (numbers.includes(sign) && display == '0') {
+      setDisplay(sign)
+      return
+    }
+    if (numbers.includes(sign)) {
+      setDisplay(display + sign)
+      return
+    }
+    if (operators.includes(sign) && display == '0') {
+      setDisplay(sign)
+      return
+    }
+    if (operators.includes(sign)) {
+      setDisplay(display + sign)
+      return
     }
   }
 
