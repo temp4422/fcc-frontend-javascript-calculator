@@ -44,12 +44,11 @@ export default function Home() {
 
   // Calculator Logic
   function handleClick(e: any) {
+    const sign = e.target.innerText
     const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     const operators = ['+', '-', '*', '/']
 
-    const sign = e.target.innerText
-
-    const displayLength = display.toString().length
+    const displayLength = display.length as number
     const lastValue = display.at(-1) as string
 
     if (sign == 'CE') {
@@ -73,8 +72,8 @@ export default function Home() {
     }
 
     if (sign == '.') {
-      // const regex = /\.[0-9]+/g
-      // console.log(display.match(regex));
+      const regex = /[0-9]+\.[0-9]+$/g // Check if last value contain '.'
+      if (display.match(regex)) return
       if (operators.includes(lastValue) || lastValue == '.') return
       return setDisplay(display + sign)
     }
