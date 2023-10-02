@@ -1,6 +1,7 @@
 'use client'
-import { ok } from 'assert'
 import { useState } from 'react'
+// import { stringMath } from 'string-math'
+const stringMath = require('string-math')
 
 // Don't change order!
 const DATA = [
@@ -27,7 +28,7 @@ const DATA = [
 ]
 
 export default function Home() {
-  const [display, setDisplay] = useState(0)
+  const [display, setDisplay] = useState('0')
 
   const buttons = DATA.map((item) => (
     <button
@@ -42,15 +43,44 @@ export default function Home() {
     </button>
   ))
 
+  // Calculator Logic
+  const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  const operators = ['+', '-', '*', '/']
+
+  // function calculateResult() {
+  //   // Use stringMath https://github.com/devrafalko/string-math
+  //   const result = stringMath(display)
+  //   setDisplay(result)
+  // }
+
   function handleClick(e: any) {
-    const button = e.target.innerText
+    const sign = e.target.innerText
 
-    if (button === 'CE') {
-      setDisplay(0)
-    }
-
-    if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(+button)) {
-      setDisplay(display + button)
+    switch (sign) {
+      case 'CE':
+        setDisplay('0')
+        break
+      case '=':
+        // calculateResult() // Call function
+        break
+      case numbers.includes(sign) && display == '0' && sign:
+        setDisplay(sign)
+        break
+      case numbers.includes(sign) && sign:
+        setDisplay(display + sign)
+        break
+      case operators.includes(sign) && display == '0' && sign:
+        setDisplay(` ${sign} `)
+        break
+      case operators.includes(display) && sign:
+        setDisplay(` ${sign} `)
+        break
+      case numbers.includes(display) && operators.includes(sign) && sign:
+        setDisplay(display + ` ${sign} `)
+        break
+      default:
+        console.log('default')
+        break
     }
   }
 

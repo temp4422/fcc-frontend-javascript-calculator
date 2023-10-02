@@ -10,9 +10,10 @@
     "serve": "bunx serve@latest out"
   },
   "dependencies": {
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "string-math": "^1.2.2"
   },
   "devDependencies": {
     "typescript": "latest",
