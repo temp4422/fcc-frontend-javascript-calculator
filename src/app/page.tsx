@@ -50,43 +50,33 @@ export default function Home() {
     const sign = e.target.innerText
 
     if (sign == 'CE') {
-      setDisplay('0')
-      return
+      return setDisplay('0')
     }
     if (sign == 'C') {
-      const tmp = display.slice(0, -1) 
-      setDisplay(tmp)
-      return
+      if (display == '0') return
+      if (display != '0' && display.toString().length == 1) return setDisplay('0')
+      if (display != '0' && display.toString().length > 1)
+        return setDisplay(display.toString().slice(0, -1))
     }
     if (sign == '=') {
-      // Calculate equation. Alternative stringMath https://github.com/devrafalko/string-math
       let result = eval(display)
       // If result have float with length bigger then 4 digits, cut off
       if (result.toString().includes('.') && result.toString().split('.')[1].length > 4) {
         result = Number.parseFloat(eval(result)).toFixed(4)
       }
-      setDisplay(result)
-      return
+      return setDisplay(result)
+      // Calculate equation. Alternative stringMath https://github.com/devrafalko/string-math
     }
     if (sign == '.') {
-      setDisplay(display + sign)
-      return
-    }
-    if (numbers.includes(sign) && display == '0') {
-      setDisplay(sign)
-      return
-    }
-    if (numbers.includes(sign)) {
-      setDisplay(display + sign)
-      return
-    }
-    if (operators.includes(sign) && display == '0') {
-      setDisplay(sign)
-      return
+      return setDisplay(display + sign)
     }
     if (operators.includes(sign)) {
-      setDisplay(display + sign)
-      return
+      if (display == '0') return setDisplay(sign)
+      if (display.toString().length >= 1) return setDisplay(display + sign)
+    }
+    if (numbers.includes(sign)) {
+      if (display == '0') return setDisplay(sign)
+      if (display.toString().length >= 1) return setDisplay(display + sign)
     }
   }
 
