@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
-// import { stringMath } from 'string-math'
-const stringMath = require('string-math')
+// const stringMath = require('string-math')
 
 // Don't change order!
 const DATA = [
@@ -35,6 +34,7 @@ export default function Home() {
       key={item.id}
       id={item.id}
       // Use different color for 'equals' sign
+      // TODO add #333233 for operators
       className={`rounded-md hover:brightness-125 active:bg-red-500
       ${item.id == 'equals' ? 'bg-[#4dc2fe]' : 'bg-[#3a3a3b]'}`}
       onClick={handleClick}
@@ -44,16 +44,10 @@ export default function Home() {
   ))
 
   // Calculator Logic
-  const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-  const operators = ['+', '-', '*', '/']
-
-  function calculateResult() {
-    // Use stringMath https://github.com/devrafalko/string-math
-    const result = stringMath(display)
-    setDisplay(result)
-  }
-
   function handleClick(e: any) {
+    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    const operators = ['+', '-', '*', '/']
+
     const sign = e.target.innerText
 
     switch (sign) {
@@ -61,7 +55,9 @@ export default function Home() {
         setDisplay('0')
         break
       case '=':
-        calculateResult()
+        // Calculate equation. Alternative stringMath https://github.com/devrafalko/string-math
+        const result = eval(display)
+        setDisplay(result)
         break
       case numbers.includes(sign) && display == '0' && sign:
         setDisplay(sign)
@@ -70,13 +66,10 @@ export default function Home() {
         setDisplay(display + sign)
         break
       case operators.includes(sign) && display == '0' && sign:
-        setDisplay(` ${sign} `)
+        setDisplay(sign)
         break
-      case operators.includes(display) && sign:
-        setDisplay(` ${sign} `)
-        break
-      case numbers.includes(display) && operators.includes(sign) && sign:
-        setDisplay(display + ` ${sign} `)
+      case operators.includes(sign) && sign:
+        setDisplay(display + sign)
         break
       default:
         console.log('default')
