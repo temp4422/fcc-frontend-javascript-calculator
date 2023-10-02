@@ -4,8 +4,8 @@ import { useState } from 'react'
 // Don't change order!
 const DATA = [
   { id: 'PADDING1', sign: '' },
-  { id: 'PADDING2', sign: '' },
   { id: 'clear', sign: 'CE' },
+  { id: 'clearLast', sign: 'C' },
   { id: 'divide', sign: '/' },
   { id: 'seven', sign: '7' },
   { id: 'eight', sign: '8' },
@@ -51,6 +51,11 @@ export default function Home() {
 
     if (sign == 'CE') {
       setDisplay('0')
+      return
+    }
+    if (sign == 'C') {
+      const tmp = display.slice(0, -1) 
+      setDisplay(tmp)
       return
     }
     if (sign == '=') {
