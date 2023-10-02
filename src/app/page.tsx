@@ -47,11 +47,11 @@ export default function Home() {
   const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
   const operators = ['+', '-', '*', '/']
 
-  // function calculateResult() {
-  //   // Use stringMath https://github.com/devrafalko/string-math
-  //   const result = stringMath(display)
-  //   setDisplay(result)
-  // }
+  function calculateResult() {
+    // Use stringMath https://github.com/devrafalko/string-math
+    const result = stringMath(display)
+    setDisplay(result)
+  }
 
   function handleClick(e: any) {
     const sign = e.target.innerText
@@ -61,7 +61,7 @@ export default function Home() {
         setDisplay('0')
         break
       case '=':
-        // calculateResult() // Call function
+        calculateResult()
         break
       case numbers.includes(sign) && display == '0' && sign:
         setDisplay(sign)
