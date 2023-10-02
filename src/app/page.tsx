@@ -26,7 +26,7 @@ const DATA = [
 ]
 
 export default function Home() {
-  const [display, setDisplay] = useState('0')
+  const [display, setDisplay] = useState<string>('0')
 
   const buttons = DATA.map((item) => (
     <button
@@ -49,17 +49,20 @@ export default function Home() {
 
     const sign = e.target.innerText
 
+    const displayLength = display.toString().length
+
     if (sign == 'CE') {
       return setDisplay('0')
     }
+
     if (sign == 'C') {
       if (display == '0') return
-      if (display != '0' && display.toString().length == 1) return setDisplay('0')
-      if (display != '0' && display.toString().length > 1)
-        return setDisplay(display.toString().slice(0, -1))
+      if (display != '0' && displayLength == 1) return setDisplay('0')
+      if (display != '0' && displayLength > 1) return setDisplay(display.toString().slice(0, -1))
     }
+
     if (sign == '=') {
-      let result = eval(display)
+      let result = eval(display).toString()
       // If result have float with length bigger then 4 digits, cut off
       if (result.toString().includes('.') && result.toString().split('.')[1].length > 4) {
         result = Number.parseFloat(eval(result)).toFixed(4)
@@ -67,16 +70,20 @@ export default function Home() {
       return setDisplay(result)
       // Calculate equation. Alternative stringMath https://github.com/devrafalko/string-math
     }
+
     if (sign == '.') {
       return setDisplay(display + sign)
     }
+
     if (operators.includes(sign)) {
       if (display == '0') return setDisplay(sign)
-      if (display.toString().length >= 1) return setDisplay(display + sign)
+      if (operators.includes(display)) return setDisplay(sign)
+      if (displayLength >= 1) return setDisplay(display + sign)
     }
+
     if (numbers.includes(sign)) {
       if (display == '0') return setDisplay(sign)
-      if (display.toString().length >= 1) return setDisplay(display + sign)
+      if (displayLength >= 1) return setDisplay(display + sign)
     }
   }
 
