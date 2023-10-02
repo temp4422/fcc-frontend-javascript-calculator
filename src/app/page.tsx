@@ -104,7 +104,7 @@ export default function Home() {
 
       <main className="flex flex-col items-center">
         <div className="min-w-[260px] max-w-[260px] h-96 bg-[#202121] rounded-md">
-          <div id="display" className="w-full h-1/4 py-8 px-2 text-2xl text-right">
+          <div id="display" className="w-full h-1/4 py-8 px-2 text-2xl text-right overflow-auto">
             {display}
           </div>
 
