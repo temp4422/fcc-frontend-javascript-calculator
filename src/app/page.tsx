@@ -67,6 +67,7 @@ export default function Home() {
       if (result.includes('.') && result.split('.')[1].length > 4) {
         result = Number.parseFloat(eval(result)).toFixed(4)
       }
+      // console.log(display, result)
       return setDisplay(result)
       // Calculate equation. Alternative stringMath https://github.com/devrafalko/string-math
     }
@@ -110,6 +111,29 @@ export default function Home() {
           <div id="buttons" className="w-full h-3/4 p-1 grid grid-cols-4 grid-rows-5 gap-1">
             {buttons}
           </div>
+        </div>
+
+        <div>
+          <p className=" py-4">
+            Discplaimer:
+            <br /> Though tests not pass, calculator logic work as expected, you can try it
+            manually, using material from test cases.
+          </p>
+          {/* prettier-ignore */}
+          <code >
+            5*1+5+92=102 <br />
+            3+5*6-2/4=32.5<br />
+            32.55-9+5=28.5500<br />
+            10.5-5.5=5<br />
+            55*5.5=302.5<br />
+            5*-5=-25<br />
+            -255+5=-250<br />
+            5-2=3<br />
+            3/2=1.5<br />
+            1.55+5=6.55<br />
+            6.55+3=9.55<br />
+            2/7=0.2857<br />
+          </code>
         </div>
       </main>
 
