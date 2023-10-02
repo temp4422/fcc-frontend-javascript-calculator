@@ -19,7 +19,7 @@ const DATA = [
   { id: 'two', sign: '2' },
   { id: 'three', sign: '3' },
   { id: 'add', sign: '+' },
-  { id: 'PADDING3', sign: '' },
+  { id: 'PADDING2', sign: '' },
   { id: 'zero', sign: '0' },
   { id: 'decimal', sign: '.' },
   { id: 'equals', sign: '=' },
@@ -79,9 +79,14 @@ export default function Home() {
     }
 
     if (operators.includes(sign)) {
+      if (sign == '-') return setDisplay(display + sign)
       if (display == '0') return setDisplay(sign)
-      if (operators.includes(lastValue) || lastValue == '.')
+      if (operators.includes(lastValue) || lastValue == '.') {
+        if (operators.includes(display.at(-2)!)) {
+          return setDisplay(display.slice(0, -2) + sign)
+        }
         return setDisplay(display.slice(0, -1) + sign)
+      }
       if (operators.includes(display)) return setDisplay(sign)
       if (displayLength >= 1) return setDisplay(display + sign)
     }
