@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // Don't change order!
 const DATA = [
@@ -113,6 +113,15 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      <aside className="m-8">
+        <p className="py-4">
+          To pass FCC tests, need to use older ReactDOM render method i.e. 'ReactDOM.render()'
+        </p>
+        <a href="./calculator-alternative.html" className="text-red-500 underline">
+          Passing FCC tests solution!
+        </a>
+      </aside>
 
       <footer className="text-sm m-4">
         Made by <a href="https://github.com/webdev4422">webdev4422</a>
