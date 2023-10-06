@@ -98,6 +98,18 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    // Add simple styles
+    const pad1 = document.getElementById('PADDING1')
+    const pad2 = document.getElementById('PADDING2')
+    const clear = document.getElementById('clear')
+    const equals = document.getElementById('equals')
+    pad1!.style.display = 'none'
+    pad2!.style.display = 'none'
+    clear!.style.cssText += 'grid-column: span 2 / span 2'
+    equals!.style.cssText += 'grid-column: span 2 / span 2'
+  })
+
   return (
     <div className="h-screen grid grid-rows-[auto_1fr_auto] text-center">
       <header className="text-2xl m-8">JavaScript Calculator</header>
