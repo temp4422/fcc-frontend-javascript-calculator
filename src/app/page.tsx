@@ -112,29 +112,6 @@ export default function Home() {
             {buttons}
           </div>
         </div>
-
-        <div>
-          <p className=" py-4">
-            Discplaimer:
-            <br /> Though tests not pass, calculator logic work as expected, you can try it
-            manually, using material from test cases.
-          </p>
-          {/* prettier-ignore */}
-          <code >
-            5*1+5+92=102 <br />
-            3+5*6-2/4=32.5<br />
-            32.55-9+5=28.5500<br />
-            10.5-5.5=5<br />
-            55*5.5=302.5<br />
-            5*-5=-25<br />
-            -255+5=-250<br />
-            5-2=3<br />
-            3/2=1.5<br />
-            1.55+5=6.55<br />
-            6.55+3=9.55<br />
-            2/7=0.2857<br />
-          </code>
-        </div>
       </main>
 
       <footer className="text-sm m-4">
