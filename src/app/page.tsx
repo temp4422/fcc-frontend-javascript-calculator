@@ -128,7 +128,7 @@ export default function Home() {
 
       <aside className="m-8">
         <p className="py-4">
-          To pass FCC tests, need to use older ReactDOM render method i.e. 'ReactDOM.render()'
+          {`To pass FCC tests, need to use older ReactDOM render method i.e. 'ReactDOM.render()'`}
         </p>
         <a href="./calculator-alternative.html" className="text-red-500 underline">
           Passing FCC tests solution!
